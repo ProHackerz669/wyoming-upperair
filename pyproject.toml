@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wyoming-upperair"
+version = "0.1.0"
+description = "Python library for downloading University of Wyoming Upper Air sounding data"
+readme = "README.md"
+requires-python = ">=3.10"
+
+authors = [
+    { name = "Tejas" }
+]
+
+license = { text = "MIT" }
+
+dependencies = [
+    "pandas>=2.0",
+    "requests>=2.31"
+]
+
+keywords = [
+    "weather",
+    "meteorology",
+    "radiosonde",
+    "upperair",
+    "wyoming"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
