@@ -10,10 +10,11 @@ readme = "README.md"
 requires-python = ">=3.10"
 
 authors = [
-    { name = "Tejas" }
+    { name = "Tejas Kalia" }
 ]
 
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 
 dependencies = [
     "pandas>=2.0",
@@ -30,8 +31,12 @@ keywords = [
 
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8"
 ]
 
 [tool.setuptools]
