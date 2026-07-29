@@ -11,6 +11,13 @@ import pandas as pd
 import requests
 from pandas.errors import EmptyDataError
 
+from .constants import (
+    BASE_URL,
+    REQUEST_TIMEOUT_SECONDS,
+    REQUEST_DELAY_SECONDS,
+    DEFAULT_HEADERS,
+)
+
 # SETTINGS
 STATIONS = ["42971"]  # Bhubaneswar station
 START_DATE = datetime(2023, 1, 1)
@@ -23,10 +30,6 @@ PROGRESS_FILE = OUTPUT_FILE.with_name(f"{OUTPUT_FILE.stem}_progress.csv")
 
 MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 3
-REQUEST_DELAY_SECONDS = 0.3
-REQUEST_TIMEOUT_SECONDS = 45
-
-BASE_URL = "https://weather.uwyo.edu/wsgi/sounding"
 
 logging.basicConfig(
     level=logging.INFO,
