@@ -10,6 +10,7 @@ from typing import Iterator
 import pandas as pd
 import requests
 from pandas.errors import EmptyDataError
+from collections.abc import Iterable
 
 from .constants import (
     BASE_URL,
@@ -19,14 +20,16 @@ from .constants import (
 )
 
 # SETTINGS
-STATIONS = ["42971"]  # Bhubaneswar station
-START_DATE = datetime(2023, 1, 1)
-END_DATE = datetime(2023, 1, 31)
+STATIONS: list[str] = []
+START_DATE = datetime.min
+END_DATE = datetime.min
 HOURS = [0, 12]
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-OUTPUT_FILE = SCRIPT_DIR / "data_bhu.csv"
-PROGRESS_FILE = OUTPUT_FILE.with_name(f"{OUTPUT_FILE.stem}_progress.csv")
+OUTPUT_FILE = SCRIPT_DIR / "output.csv"
+PROGRESS_FILE = OUTPUT_FILE.with_name(
+    f"{OUTPUT_FILE.stem}_progress.csv"
+)
 
 MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 3
@@ -39,7 +42,7 @@ logging.basicConfig(
 
 def create_session() -> requests.Session:
     session = requests.Session()
-    session.headers.update({"User-Agent": "Mozilla/5.0"})
+    session.headers.update(DEFAULT_HEADERS)
     return session
 
 def get_completed_launches(output_file: Path) -> set[tuple[str, int, str]]:
@@ -243,7 +246,7 @@ def daterange(start: datetime, end: datetime) -> Iterator[datetime]:
         yield current
         current += timedelta(days=1)
 
-def main() -> None:
+def _run_download() -> None:
     session = create_session()
 
     completed_launches = get_completed_launches(OUTPUT_FILE)
@@ -347,9 +350,41 @@ def download(
     start: datetime,
     end: datetime,
     output: str | Path,
+    hours: Iterable[int] = (0, 12),
+    overwrite: bool = False,
 ):
     """
-    Download sounding data for a station.
+    Download University of Wyoming upper-air sounding data.
+
+    Parameters
+    ----------
+    station : str
+        WMO station number (for example, "42971").
+
+    start : datetime
+        First launch date to download.
+
+    end : datetime
+        Last launch date to download.
+
+    output : str | Path
+        Path to the output CSV file.
+
+    hours : Iterable[int], optional
+        UTC launch hours to download.
+        Example:
+            [0]
+            [12]
+            [0, 12]
+            range(0, 24, 3)
+
+    overwrite : bool, optional
+        If True, deletes any existing output and progress files
+        before downloading.
+
+    Returns
+    -------
+    None
     """
 
     global STATIONS
@@ -357,13 +392,23 @@ def download(
     global END_DATE
     global OUTPUT_FILE
     global PROGRESS_FILE
+    global HOURS
 
     STATIONS = [station]
     START_DATE = start
     END_DATE = end
+    HOURS = list(hours)
+
     OUTPUT_FILE = Path(output)
     PROGRESS_FILE = OUTPUT_FILE.with_name(
         f"{OUTPUT_FILE.stem}_progress.csv"
     )
 
-    main()
+    if overwrite:
+        if OUTPUT_FILE.exists():
+            OUTPUT_FILE.unlink()
+
+        if PROGRESS_FILE.exists():
+            PROGRESS_FILE.unlink()
+
+    _run_download()
