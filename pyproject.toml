@@ -5,7 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wyoming-upperair"
 version = "0.1.0"
-description = "Download University of Wyoming upper-air sounding data directly into CSV files."readme = "README.md"
+description = "Download University of Wyoming upper-air sounding data directly into CSV files."
+readme = "README.md"
 requires-python = ">=3.10"
 
 authors = [
@@ -15,15 +16,15 @@ authors = [
 license = "MIT"
 license-files = ["LICENSE"]
 
-[project.urls]
-Homepage = "https://github.com/ProHackerz669/wyoming-upperair"
-Repository = "https://github.com/ProHackerz669/wyoming-upperair"
-Issues = "https://github.com/ProHackerz669/wyoming-upperair/issues"
-
 dependencies = [
     "pandas>=2.0",
     "requests>=2.31"
 ]
+
+[project.urls]
+Homepage = "https://github.com/ProHackerz669/wyoming-upperair"
+Repository = "https://github.com/ProHackerz669/wyoming-upperair"
+Issues = "https://github.com/ProHackerz669/wyoming-upperair/issues"
 
 keywords = [
     "weather",
