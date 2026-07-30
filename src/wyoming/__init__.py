@@ -8,3 +8,13 @@ from .exceptions import (
 )
 
 from .version import __version__
+
+__all__ = [
+    "download",
+    "__version__",
+    "WyomingError",
+    "DownloadError",
+    "NoDataError",
+    "ParsingError",
+    "ProgressFileError",
+]

@@ -5,8 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wyoming-upperair"
 version = "0.1.0"
-description = "Python library for downloading University of Wyoming Upper Air sounding data"
-readme = "README.md"
+description = "Download University of Wyoming upper-air sounding data directly into CSV files."readme = "README.md"
 requires-python = ">=3.10"
 
 authors = [
@@ -16,6 +15,11 @@ authors = [
 license = "MIT"
 license-files = ["LICENSE"]
 
+[project.urls]
+Homepage = "https://github.com/ProHackerz669/wyoming-upperair"
+Repository = "https://github.com/ProHackerz669/wyoming-upperair"
+Issues = "https://github.com/ProHackerz669/wyoming-upperair/issues"
+
 dependencies = [
     "pandas>=2.0",
     "requests>=2.31"
@@ -24,14 +28,22 @@ dependencies = [
 keywords = [
     "weather",
     "meteorology",
-    "radiosonde",
+    "upper-air",
     "upperair",
-    "wyoming"
+    "radiosonde",
+    "sounding",
+    "wyoming",
 ]
 
 classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent"
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 
 [project.optional-dependencies]
