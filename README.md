@@ -27,23 +27,22 @@ pip install -e .
 pip install wyoming-upperair
 ```
 
-*(Available after the first public release.)*
-
 ## Example
 
 ```python
 from datetime import datetime
-import wyoming
+from wyoming import dowload
 
-wyoming.download(
-    station="42971",
+download(
+    station="72672",
     start=datetime(2023, 1, 1),
     end=datetime(2023, 1, 31),
     output="data.csv",
+    hours=[0]
 )
 ```
 
-Download only 00 UTC:
+Download any UTC:
 
 ```python
 wyoming.download(
@@ -51,7 +50,7 @@ wyoming.download(
     start=datetime(2023, 1, 1),
     end=datetime(2023, 1, 31),
     output="data.csv",
-    hours=[0],
+    hours=[0,3,6,...,21],
 )
 ```
 

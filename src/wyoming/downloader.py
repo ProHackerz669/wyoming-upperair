@@ -167,7 +167,7 @@ def fetch_sounding_csv(session: requests.Session,dt: datetime,station_id: str,) 
                     MAX_RETRIES,
                 )
 
-            elif response.status_code == 400:
+            elif response.status_code in (400,404) :
                 return "no_data", None
 
             else:
@@ -289,7 +289,7 @@ def _run_download() -> None:
                 if fetch_status == "failed":
                     save_progress(PROGRESS_FILE,dt,station_id,"failed")
 
-                    logging.warning("Request failed for Station %s at %s; ","\nit will retry next run.",station_id,dt)
+                    logging.warning("Request failed for Station %s at %s; it will retry next run.",station_id,dt)
                     continue
 
                 df = parse_sounding(text, dt, station_id)
@@ -297,7 +297,7 @@ def _run_download() -> None:
                 if df is None:
                     save_progress(PROGRESS_FILE,dt,station_id,"failed")
 
-                    logging.warning("No usable rows for Station %s at %s; ","\nit will retry next run.",station_id,dt)
+                    logging.warning("No usable rows for Station %s at %s; it will retry next run.",station_id,dt)
                     continue
 
                 write_header = (
