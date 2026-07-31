@@ -14,6 +14,7 @@ from collections.abc import Iterable
 
 from .constants import (
     BASE_URL,
+    RETRY_DELAY_SECONDS,
     REQUEST_TIMEOUT_SECONDS,
     REQUEST_DELAY_SECONDS,
     DEFAULT_HEADERS,

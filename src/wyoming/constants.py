@@ -4,6 +4,8 @@ Constants used throughout the Wyoming package.
 
 BASE_URL = "https://weather.uwyo.edu/wsgi/sounding"
 
+RETRY_DELAY_SECONDS = 3
+
 REQUEST_TIMEOUT_SECONDS = 45
 
 REQUEST_DELAY_SECONDS = 0.3
