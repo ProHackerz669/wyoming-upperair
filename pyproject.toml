@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wyoming-upperair"
-version = "1.0.1"
+version = "1.1.0"
 description = "Download University of Wyoming upper-air sounding data directly into CSV files."
 readme = "README.md"
 requires-python = ">=3.10"

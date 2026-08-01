@@ -46,7 +46,7 @@ Download any UTC:
 
 ```python
 wyoming.download(
-    station="42971",
+    station="72672",
     start=datetime(2023, 1, 1),
     end=datetime(2023, 1, 31),
     output="data.csv",
@@ -58,7 +58,7 @@ Start a fresh download:
 
 ```python
 wyoming.download(
-    station="42971",
+    station="72672",
     start=datetime(2023, 1, 1),
     end=datetime(2023, 1, 31),
     output="data.csv",

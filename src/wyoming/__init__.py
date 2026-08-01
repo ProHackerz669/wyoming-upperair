@@ -1,5 +1,5 @@
 from .downloader import download
-#no use for no
+#No use for now
 from .exceptions import (
     WyomingError,
     DownloadError,
