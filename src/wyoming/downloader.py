@@ -33,7 +33,6 @@ PROGRESS_FILE = OUTPUT_FILE.with_name(
 )
 
 MAX_RETRIES = 3
-RETRY_DELAY_SECONDS = 3
 
 logging.basicConfig(
     level=logging.INFO,
