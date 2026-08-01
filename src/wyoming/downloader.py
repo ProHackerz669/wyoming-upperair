@@ -19,6 +19,7 @@ from .constants import (
     RETRY_DELAY_SECONDS,
     REQUEST_TIMEOUT_SECONDS,
     REQUEST_DELAY_SECONDS,
+    MAX_RETRIES,
     DEFAULT_HEADERS,
 )
 
@@ -33,8 +34,6 @@ OUTPUT_FILE = SCRIPT_DIR / "output.csv"
 PROGRESS_FILE = OUTPUT_FILE.with_name(
     f"{OUTPUT_FILE.stem}_progress.csv"
 )
-
-MAX_RETRIES = 3
 
 logging.basicConfig(
     level=logging.INFO,
