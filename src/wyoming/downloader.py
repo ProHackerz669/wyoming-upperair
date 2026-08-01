@@ -7,6 +7,8 @@ from io import StringIO
 from pathlib import Path
 from typing import Iterator
 
+import sys
+import importlib.metadata
 import pandas as pd
 import requests
 from pandas.errors import EmptyDataError
@@ -245,7 +247,42 @@ def daterange(start: datetime, end: datetime) -> Iterator[datetime]:
     while current <= end:
         yield current
         current += timedelta(days=1)
+        
+def _check_environment() -> None:
+    """Check that the current environment can run the package."""
 
+    # Python version
+    if sys.version_info < (3, 10):
+        raise RuntimeError(
+            f"Python {sys.version.split()[0]} detected.\n"
+            "wyoming-upperair requires Python 3.10 or newer."
+        )
+
+    # pandas
+    try:
+        pandas_version = importlib.metadata.version("pandas")
+    except importlib.metadata.PackageNotFoundError:
+        raise RuntimeError(
+            "pandas is not installed.\n"
+            "Run:\n\npip install pandas"
+        )
+
+    # requests
+    try:
+        requests_version = importlib.metadata.version("requests")
+    except importlib.metadata.PackageNotFoundError:
+        raise RuntimeError(
+            "requests is not installed.\n"
+            "Run:\n\npip install requests"
+        )
+
+    logging.info(
+        "Environment OK | Python %s | pandas %s | requests %s",
+        sys.version.split()[0],
+        pandas_version,
+        requests_version,
+    )
+    
 def _run_download() -> None:
     session = create_session()
 
@@ -411,4 +448,5 @@ def download(
         if PROGRESS_FILE.exists():
             PROGRESS_FILE.unlink()
 
+    _check_environment()
     _run_download()
