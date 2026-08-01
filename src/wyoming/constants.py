@@ -10,6 +10,8 @@ REQUEST_TIMEOUT_SECONDS = 45
 
 REQUEST_DELAY_SECONDS = 0.3
 
+MAX_RETRIES = 5
+
 DEFAULT_HEADERS = {
     "User-Agent": "wyoming-upperair"
 }
